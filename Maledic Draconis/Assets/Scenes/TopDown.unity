@@ -369,6 +369,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 8228185846609829061, guid: 4ad3fdcbcdf002d41bb0e1a2a86607e3, type: 3}
+  slimePrefab: {fileID: 8013657426892473119, guid: d2248ecb73630a8459a54a9e6ece7935,
+    type: 3}
+  wolfPrefab: {fileID: 7090190337992903528, guid: 9c1b881a3985b4949ab8e729e3da52bc,
+    type: 3}
+  treePrefab: {fileID: 3770772145217775125, guid: e8bed682c2ff9b54488d78ade5116b6a,
+    type: 3}
 --- !u!4 &961637153
 Transform:
   m_ObjectHideFlags: 0
