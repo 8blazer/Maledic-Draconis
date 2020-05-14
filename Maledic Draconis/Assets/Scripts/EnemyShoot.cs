@@ -36,4 +36,3 @@ public class EnemyShoot : MonoBehaviour
         }
     }
 }
-/*transform.position.x - player.transform.position.x]^2 + [transform.position.y - player.transform.position.y]^2*/

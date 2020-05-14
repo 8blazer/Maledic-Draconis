@@ -5,14 +5,34 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f;
     List<string> inactiveObj = new List<string>();
-    float swordDelay;
     float timer = 0;
     // Start is called before the first frame update
     void Start()
     {
-
+        if (PlayerPrefs.GetFloat("moveSpeed") == 0)
+        {
+            PlayerPrefs.SetFloat("moveSpeed", 3);
+        }
+        if (PlayerPrefs.GetInt("maxHealth") == 0)
+        {
+            PlayerPrefs.SetInt("maxHealth", 100);
+        }
+        if (PlayerPrefs.GetInt("damage") == 0)
+        {
+            PlayerPrefs.SetInt("damage", 5);
+        }
+        if (PlayerPrefs.GetInt("critChance") == 0)
+        {
+            PlayerPrefs.SetInt("critChance", 10);
+        }
+        if (PlayerPrefs.GetInt("critDamage") == 0)
+        {
+            PlayerPrefs.SetInt("critDamage", 2);
+        }
+        Debug.Log(PlayerPrefs.GetInt("damage"));
+        int health = PlayerPrefs.GetInt("maxHealth");
+        timer = PlayerPrefs.GetInt("swordDelay");
     }
 
     // Update is called once per frame
@@ -21,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
         Vector2 velocity = new Vector2(x, y);
-        GetComponent<Rigidbody2D>().velocity = velocity * moveSpeed;
+        GetComponent<Rigidbody2D>().velocity = velocity * PlayerPrefs.GetFloat("moveSpeed");
         foreach (GameObject square in LevelGen.squares)
         {
             if (Vector3.Distance(transform.position, square.transform.position) > 11 && square.tag == "Wall")

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6787666009427906618}
   - component: {fileID: 6175076830318750038}
   - component: {fileID: 5192443548977490590}
+  - component: {fileID: 4054776770345488769}
   m_Layer: 8
   m_Name: Pinecone
   m_TagString: EBullet
@@ -120,3 +121,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &4054776770345488769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1063694573220636156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 725250897b1ec4e478c4c960390c2cef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
