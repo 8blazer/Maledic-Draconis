@@ -20,6 +20,7 @@ public class LevelGen2 : MonoBehaviour
         }
         if (LevelGen.open.Contains(transform.position.x + " " + transform.position.y))
         {
+            LevelGen.squares.Remove(this.gameObject);
             Destroy(this.gameObject);
         }
     }

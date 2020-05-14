@@ -20,9 +20,9 @@ public class PlayerMovement : MonoBehaviour
         float y = Input.GetAxis("Vertical");
         Vector2 velocity = new Vector2(x, y);
         GetComponent<Rigidbody2D>().velocity = velocity * moveSpeed;
-        foreach (GameObject square in Resources.FindObjectsOfTypeAll(typeof(GameObject)) as GameObject[])
+        foreach (GameObject square in LevelGen.squares)
         {
-            if (Vector3.Distance(transform.position, square.transform.position) > 11)
+            if (Vector3.Distance(transform.position, square.transform.position) > 11 && square.tag == "Wall")
             {
                 square.transform.gameObject.SetActive(false);
             }

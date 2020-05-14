@@ -14,11 +14,11 @@ GameObject:
   - component: {fileID: -6484202949100375383}
   m_Layer: 0
   m_Name: Square
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4793204098116488926
 Transform:
   m_ObjectHideFlags: 0

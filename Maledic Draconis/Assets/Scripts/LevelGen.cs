@@ -6,6 +6,7 @@ public class LevelGen : MonoBehaviour
 {
 
     public GameObject prefab;
+    public static List<GameObject> squares = new List<GameObject>();
     System.Random rnd = new System.Random();
     List<string> direction = new List<string>();
     static public List<string> open = new List<string>();
@@ -31,7 +32,8 @@ public class LevelGen : MonoBehaviour
     {
         while (i < 10000) //Generates the tiles
         {
-            Instantiate(prefab, new Vector3(x, y, 0), Quaternion.identity);
+            GameObject square = Instantiate(prefab, new Vector3(x, y, 0), Quaternion.identity);
+            squares.Add(square);
             if (x == 49.5)
             {
                 x = -49.5f;
