@@ -33,7 +33,7 @@ public class EnemyAI : MonoBehaviour
             triggered = true;
             timer = 0;
         }
-        else if (triggered == false && timer > 3 &&chaseDirection.magnitude < 10)
+        else if (triggered == false && timer > 3)
         {
             triggered = true;
             Pace();
@@ -41,7 +41,7 @@ public class EnemyAI : MonoBehaviour
         }
         if (chaseDirection.magnitude > chaseTriggerDistance)
         {
-            if (triggered == true && rnd.Next(1,101) == 1)
+            if (triggered == true && Random.Range(1,101) == 1)
             {
                 triggered = false;
                 timerGoing = true;
@@ -57,13 +57,13 @@ public class EnemyAI : MonoBehaviour
     }
     void Pace()
     {
-        int xForce = rnd.Next(25, 40);
-        int yForce = rnd.Next(25, 40);
-        if (rnd.Next(1,3) == 1)
+        int xForce = Random.Range(25, 40);
+        int yForce = Random.Range(25, 40);
+        if (Random.Range(1,3) == 1)
         {
             xForce = xForce * -1;
         }
-        if (rnd.Next(1, 3) == 1)
+        if (Random.Range(1, 3) == 1)
         {
             yForce = yForce * -1;
         }

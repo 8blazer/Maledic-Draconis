@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
     List<string> inactiveObj = new List<string>();
+    float swordDelay;
+    float timer = 0;
     // Start is called before the first frame update
     void Start()
     {
