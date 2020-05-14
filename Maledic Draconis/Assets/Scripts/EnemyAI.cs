@@ -9,7 +9,8 @@ public class EnemyAI : MonoBehaviour
     public float chaseTriggerDistance = 5.0f;
     Vector3 startPosition;
     bool triggered = false;
-    float timer = 0;
+    float timer = 3.1f;
+    bool timerGoing = false;
     System.Random rnd = new System.Random();
     // Start is called before the first frame update
     void Start()
@@ -21,24 +22,30 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (timerGoing)
+        {
+            timer += Time.deltaTime;
+        }
         Vector2 chaseDirection = new Vector2(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y);
         if (chaseDirection.magnitude <= chaseTriggerDistance)
         {
             ChasePlayer();
             triggered = true;
+            timer = 0;
         }
-        else if (triggered == false && chaseDirection.magnitude < 10)
+        else if (triggered == false && timer > 3 &&chaseDirection.magnitude < 10)
         {
             triggered = true;
             Pace();
+            timer = 0;
         }
         if (chaseDirection.magnitude > chaseTriggerDistance)
         {
-            timer += Time.deltaTime;
-            if (timer > 3)
+            if (triggered == true && rnd.Next(1,101) == 1)
             {
                 triggered = false;
-                timer = 0;
+                timerGoing = true;
+                GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
             }
         }
     }
@@ -50,6 +57,16 @@ public class EnemyAI : MonoBehaviour
     }
     void Pace()
     {
-        GetComponent<Rigidbody2D>().AddForce(new Vector2(rnd.Next(-15, 16), rnd.Next(-15, 16)));
+        int xForce = rnd.Next(25, 40);
+        int yForce = rnd.Next(25, 40);
+        if (rnd.Next(1,3) == 1)
+        {
+            xForce = xForce * -1;
+        }
+        if (rnd.Next(1, 3) == 1)
+        {
+            yForce = yForce * -1;
+        }
+        GetComponent<Rigidbody2D>().AddForce(new Vector2(xForce, yForce));
     }
 }

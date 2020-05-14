@@ -5,9 +5,9 @@ using UnityEngine;
 public class EnemyShoot : MonoBehaviour
 {
     public GameObject prefab;
-    public Transform player;
+    public GameObject player;
     public float bulletSpeed = 10f;
-    public float playerDistanceMin = 10;
+    public float playerDistanceMin = 5;
     private float playerDistance = 0;
     public float bulletLifetime = 1.0f;
     public float shootDelay = 1.0f;
@@ -16,12 +16,13 @@ public class EnemyShoot : MonoBehaviour
     void Start()
     {
         timer = shootDelay;
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector2 shootDirection = new Vector2(player.position.x - transform.position.x, player.position.y - transform.position.y);
+        Vector2 shootDirection = new Vector2(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y);
         playerDistance = shootDirection.magnitude;
         timer += Time.deltaTime;
         if (timer > shootDelay && playerDistance < playerDistanceMin)
