@@ -68,6 +68,7 @@ public class EnemyAI : MonoBehaviour
         if (health < 1)
         {
             PlayerPrefs.SetInt("EXP", PlayerPrefs.GetInt("EXP") + 1);
+            LevelGen.enemyCount = LevelGen.enemyCount - 1;
             Destroy(this.gameObject);
         }
     }

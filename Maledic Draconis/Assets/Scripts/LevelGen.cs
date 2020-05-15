@@ -27,6 +27,7 @@ public class LevelGen : MonoBehaviour
     public GameObject slimePrefab;
     public GameObject wolfPrefab;
     public GameObject treePrefab;
+    static public int enemyCount;
     // Start is called before the first frame update
     void Start()
     {
@@ -388,7 +389,7 @@ public class LevelGen : MonoBehaviour
         }
 
         //Enemy Generator
-        int enemyCount = open.Count / 60;
+        enemyCount = open.Count / 60;
         enemyCount = enemyCount + rnd.Next(-2, 3);
         if (enemyCount < 5)
         {
