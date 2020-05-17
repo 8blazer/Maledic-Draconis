@@ -30,7 +30,6 @@ public class PlayerMovement : MonoBehaviour
         {
             PlayerPrefs.SetInt("critDamage", 2);
         }
-        Debug.Log(PlayerPrefs.GetInt("damage"));
         int health = PlayerPrefs.GetInt("maxHealth");
         timer = PlayerPrefs.GetInt("swordDelay");
     }

@@ -112,9 +112,6 @@ public class LevelGen : MonoBehaviour
                 midX = midX * -1;
             }
         }
-        Debug.Log("Start Cords: " + startX + ", " + startY);
-        Debug.Log("Mid Cords: " + midX + ", " + midY);
-        Debug.Log("Goal Cords: " + goalX + ", " + goalY);
         open.Add(startX + " " + startY);
         while (startX != midX || startY != midY) //Creates the path from the start to the middle
         {

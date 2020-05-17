@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {
     public GameObject player;
+    GameObject saveManager;
     public float chaseSpeed = 1.0f;
     Vector3 startPosition;
     bool triggered = false;
@@ -24,6 +25,7 @@ public class EnemyAI : MonoBehaviour
         {
             PlayerPrefs.SetInt("chaseTriggerDistance", 5);
         }
+        saveManager = GameObject.Find("GameMaster");
     }
 
     // Update is called once per frame
@@ -100,22 +102,22 @@ public class EnemyAI : MonoBehaviour
             {
                 if (PlayerPrefs.GetInt("critChance") + PlayerPrefs.GetInt("startledCritChance") > 99 || Random.Range(1, 101 - PlayerPrefs.GetInt("critChance") + PlayerPrefs.GetInt("startledCritChance")) == 1)
                 {
-                    health = health - PlayerPrefs.GetInt("damage") + PlayerPrefs.GetInt("critDamage") + PlayerPrefs.GetInt("startleDamage") + PlayerPrefs.GetInt("startleCritDamage");
+                    health = health - saveManager.GetComponent<SaveManager>().damage + PlayerPrefs.GetInt("critDamage") + PlayerPrefs.GetInt("startleDamage") + PlayerPrefs.GetInt("startleCritDamage");
                 }
                 else
                 {
-                    health = health - PlayerPrefs.GetInt("damage") + PlayerPrefs.GetInt("startledDamage") - Random.Range(-1, 2);
+                    health = health - saveManager.GetComponent<SaveManager>().damage + PlayerPrefs.GetInt("startledDamage") - Random.Range(-1, 2);
                 }
             }
             else
             {
                 if (PlayerPrefs.GetInt("critChance") > 99 || Random.Range(1, 101 - PlayerPrefs.GetInt("critChance")) == 1)
                 {
-                    health = health - (PlayerPrefs.GetInt("damage") + PlayerPrefs.GetInt("critDamage"));
+                    health = health - (saveManager.GetComponent<SaveManager>().damage + saveManager.GetComponent<SaveManager>().critDamage);
                 }
                 else
                 {
-                    health = health - PlayerPrefs.GetInt("damage") - Random.Range(-1, 2);
+                    health = health - saveManager.GetComponent<SaveManager>().damage - Random.Range(-1, 2);
                 }
             }
         }
