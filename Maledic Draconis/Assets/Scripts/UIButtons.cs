@@ -8,9 +8,11 @@ public class UIButtons : MonoBehaviour
 {
     string saveFile = "save.txt";
     GameObject saveManager;
+    public Text exp;
     // Start is called before the first frame update
-    void Start()
+    IEnumerable Start()
     {
+        yield return new WaitForSeconds(.1f);
         saveManager = GameObject.Find("GameMaster");
         FileInfo fileInfo = new FileInfo(saveFile);
         string fullname = fileInfo.FullName;
@@ -22,10 +24,15 @@ public class UIButtons : MonoBehaviour
         {
             this.gameObject.GetComponent<Button>().interactable = false;
         }
+        if (this.gameObject.name == "MainMenu" && SceneManager.GetActiveScene().name == "SkillTree")
+        {
+            exp.text = saveManager.GetComponent<SaveManager>().exp + "/" + saveManager.GetComponent<SaveManager>().expNeeded;
+        }
     }
     
     public void StartButton()
     {
+        saveManager = GameObject.Find("GameMaster");
         FileInfo fileInfo = new FileInfo(saveFile);
         string fullname = fileInfo.FullName;
         if (this.gameObject.name == "NewGame" && File.Exists(fullname))
@@ -41,6 +48,7 @@ public class UIButtons : MonoBehaviour
 
     public void MainMenu()
     {
+        saveManager = GameObject.Find("GameMaster");
         saveManager.GetComponent<SaveManager>().ToJson();
         SceneManager.LoadScene("Title");
     }

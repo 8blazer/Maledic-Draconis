@@ -521,7 +521,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -108.01355, y: -75.75252}
+  m_AnchoredPosition: {x: 252, y: 72}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &682140324
@@ -976,6 +976,7 @@ MonoBehaviour:
   maxHealth: 0
   healthRegen: 0
   speed: 0
+  defense: 0
   critChance: 0
   critDamage: 0
   swingSpeed: 0
@@ -989,6 +990,12 @@ MonoBehaviour:
   notFullHealthSwing: 0
   speedByHealth: 0
   speedByMissingHealth: 0
+  maxHPUpgrade: 0
+  maxHPMinusSpeedUpgrade: 0
+  healthRegenUpgrade: 0
+  healthRegenMinusHPUpgrade: 0
+  healthRegenMinusSpeedUpgrade: 0
+  speedUpgrade: 0
 --- !u!4 &1341078689
 Transform:
   m_ObjectHideFlags: 0

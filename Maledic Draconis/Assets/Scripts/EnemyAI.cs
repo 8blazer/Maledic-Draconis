@@ -14,6 +14,7 @@ public class EnemyAI : MonoBehaviour
     bool timerGoing = false;
     bool startledTimerGoing = false;
     float startledTimer;
+    float attackTimer;
     public int health;
     System.Random rnd = new System.Random();
     // Start is called before the first frame update
@@ -39,6 +40,7 @@ public class EnemyAI : MonoBehaviour
                 startled = false;
             }
         }
+        attackTimer += Time.deltaTime;
         Vector2 chaseDirection = new Vector2(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y);
         if (chaseDirection.magnitude <= saveManager.GetComponent<SaveManager>().enemyTriggerDistance)
         {
@@ -65,8 +67,27 @@ public class EnemyAI : MonoBehaviour
         }
         if (health < 1)
         {
-            saveManager.GetComponent<SaveManager>().exp = saveManager.GetComponent<SaveManager>().exp + 1;
             LevelGen.enemyCount = LevelGen.enemyCount - 1;
+            if (this.gameObject.name == "Slime(Clone)")
+            {
+                saveManager.GetComponent<SaveManager>().exp = saveManager.GetComponent<SaveManager>().exp + 1;
+            }
+            else if (this.gameObject.name == "Wolf(Clone)")
+            {
+                saveManager.GetComponent<SaveManager>().exp = saveManager.GetComponent<SaveManager>().exp + 2;
+            }
+            else if (this.gameObject.name == "Tree(Clone)")
+            {
+                saveManager.GetComponent<SaveManager>().exp = saveManager.GetComponent<SaveManager>().exp + 3;
+            }
+            else if (this.gameObject.name == "Kobold(Clone)")
+            {
+                saveManager.GetComponent<SaveManager>().exp = saveManager.GetComponent<SaveManager>().exp + 4;
+            }
+            else
+            {
+                saveManager.GetComponent<SaveManager>().exp = saveManager.GetComponent<SaveManager>().exp + 5;
+            }
             Destroy(this.gameObject);
         }
     }
@@ -115,6 +136,27 @@ public class EnemyAI : MonoBehaviour
                 {
                     health = health - saveManager.GetComponent<SaveManager>().damage - Random.Range(-1, 2);
                 }
+            }
+        }
+    }
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            if (this.gameObject.name == "Slime(Clone)" && attackTimer > 3)
+            {
+                PlayerMovement.health = PlayerMovement.health - 7 + saveManager.GetComponent<SaveManager>().defense;
+                attackTimer = 0;
+            }
+            else if (this.gameObject.name == "Wolf(Clone)" && attackTimer > 2)
+            {
+                PlayerMovement.health = PlayerMovement.health - 10 + saveManager.GetComponent<SaveManager>().defense;
+                attackTimer = 0;
+            }
+            else if (this.gameObject.name == "Kobold(Clone)" && attackTimer > 1)
+            {
+                PlayerMovement.health = PlayerMovement.health - 10 + saveManager.GetComponent<SaveManager>().defense;
+                attackTimer = 0;
             }
         }
     }

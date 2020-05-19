@@ -78,7 +78,7 @@ public class LevelGen : MonoBehaviour
             {
                 midY = goalY - startY;
                 iConverter = (int)midY;
-                i = rnd.Next(1, iConverter);
+                i = rnd.Next(0, iConverter);
                 midY = iConverter - startY;
             }
             i = rnd.Next(1, 3);

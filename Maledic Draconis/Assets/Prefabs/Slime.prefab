@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  chaseSpeed: 3
+  chaseSpeed: 1.5
   health: 10
 --- !u!50 &-4517343601028825477
 Rigidbody2D:
