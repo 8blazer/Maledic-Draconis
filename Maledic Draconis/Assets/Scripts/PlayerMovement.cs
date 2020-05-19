@@ -5,33 +5,16 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
+    public GameObject saveManager;
     List<string> inactiveObj = new List<string>();
     float timer = 0;
+    int health;
     // Start is called before the first frame update
     void Start()
     {
-        if (PlayerPrefs.GetFloat("moveSpeed") == 0)
-        {
-            PlayerPrefs.SetFloat("moveSpeed", 3);
-        }
-        if (PlayerPrefs.GetInt("maxHealth") == 0)
-        {
-            PlayerPrefs.SetInt("maxHealth", 100);
-        }
-        if (PlayerPrefs.GetInt("damage") == 0)
-        {
-            PlayerPrefs.SetInt("damage", 5);
-        }
-        if (PlayerPrefs.GetInt("critChance") == 0)
-        {
-            PlayerPrefs.SetInt("critChance", 10);
-        }
-        if (PlayerPrefs.GetInt("critDamage") == 0)
-        {
-            PlayerPrefs.SetInt("critDamage", 2);
-        }
-        int health = PlayerPrefs.GetInt("maxHealth");
-        timer = PlayerPrefs.GetInt("swordDelay");
+        saveManager = GameObject.Find("GameMaster");
+        health = saveManager.GetComponent<SaveManager>().maxHealth;
+        timer = saveManager.GetComponent<SaveManager>().swingSpeed;
     }
 
     // Update is called once per frame
@@ -40,7 +23,15 @@ public class PlayerMovement : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
         Vector2 velocity = new Vector2(x, y);
-        GetComponent<Rigidbody2D>().velocity = velocity * PlayerPrefs.GetFloat("moveSpeed");
+        if (saveManager.GetComponent<SaveManager>().speedByMissingHealth)
+        {
+            GetComponent<Rigidbody2D>().velocity = velocity * saveManager.GetComponent<SaveManager>().speed * saveManager.GetComponent<SaveManager>().maxHealth / health / 2;
+        }
+        else if (saveManager.GetComponent<SaveManager>().speedByHealth)
+        {
+            GetComponent<Rigidbody2D>().velocity = velocity * saveManager.GetComponent<SaveManager>().speed * health / saveManager.GetComponent<SaveManager>().maxHealth * 2;
+        }
+        GetComponent<Rigidbody2D>().velocity = velocity * saveManager.GetComponent<SaveManager>().speed;
         foreach (GameObject square in LevelGen.squares)
         {
             if (Vector3.Distance(transform.position, square.transform.position) > 11 && square.tag == "Wall")

@@ -21,10 +21,6 @@ public class EnemyAI : MonoBehaviour
     {
         startPosition = transform.position;
         player = GameObject.FindGameObjectWithTag("Player");
-        if (PlayerPrefs.GetInt("chaseTriggerDistance") == 0)
-        {
-            PlayerPrefs.SetInt("chaseTriggerDistance", 5);
-        }
         saveManager = GameObject.Find("GameMaster");
     }
 
@@ -44,7 +40,7 @@ public class EnemyAI : MonoBehaviour
             }
         }
         Vector2 chaseDirection = new Vector2(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y);
-        if (chaseDirection.magnitude <= PlayerPrefs.GetInt("chaseTriggerDistance"))
+        if (chaseDirection.magnitude <= saveManager.GetComponent<SaveManager>().enemyTriggerDistance)
         {
             ChasePlayer();
             triggered = true;
@@ -58,7 +54,7 @@ public class EnemyAI : MonoBehaviour
             Pace();
             timer = 0;
         }
-        if (chaseDirection.magnitude > PlayerPrefs.GetInt("chaseTriggerDistance"))
+        if (chaseDirection.magnitude > saveManager.GetComponent<SaveManager>().enemyTriggerDistance)
         {
             if (triggered == true && Random.Range(1,101) == 1)
             {
@@ -69,7 +65,7 @@ public class EnemyAI : MonoBehaviour
         }
         if (health < 1)
         {
-            PlayerPrefs.SetInt("EXP", PlayerPrefs.GetInt("EXP") + 1);
+            saveManager.GetComponent<SaveManager>().exp = saveManager.GetComponent<SaveManager>().exp + 1;
             LevelGen.enemyCount = LevelGen.enemyCount - 1;
             Destroy(this.gameObject);
         }
@@ -100,18 +96,18 @@ public class EnemyAI : MonoBehaviour
         {
             if (startled)
             {
-                if (PlayerPrefs.GetInt("critChance") + PlayerPrefs.GetInt("startledCritChance") > 99 || Random.Range(1, 101 - PlayerPrefs.GetInt("critChance") + PlayerPrefs.GetInt("startledCritChance")) == 1)
+                if (saveManager.GetComponent<SaveManager>().critChance + saveManager.GetComponent<SaveManager>().startleCritChance > 99 || Random.Range(1, 101 - saveManager.GetComponent<SaveManager>().critChance + saveManager.GetComponent<SaveManager>().startleCritChance) == 1)
                 {
-                    health = health - saveManager.GetComponent<SaveManager>().damage + PlayerPrefs.GetInt("critDamage") + PlayerPrefs.GetInt("startleDamage") + PlayerPrefs.GetInt("startleCritDamage");
+                    health = health - (saveManager.GetComponent<SaveManager>().damage + saveManager.GetComponent<SaveManager>().critDamage + saveManager.GetComponent<SaveManager>().startleDamage + saveManager.GetComponent<SaveManager>().startleCritDamage);
                 }
                 else
                 {
-                    health = health - saveManager.GetComponent<SaveManager>().damage + PlayerPrefs.GetInt("startledDamage") - Random.Range(-1, 2);
+                    health = health - (saveManager.GetComponent<SaveManager>().damage + saveManager.GetComponent<SaveManager>().startleDamage) - Random.Range(-1, 2);
                 }
             }
             else
             {
-                if (PlayerPrefs.GetInt("critChance") > 99 || Random.Range(1, 101 - PlayerPrefs.GetInt("critChance")) == 1)
+                if (saveManager.GetComponent<SaveManager>().critChance > 99 || Random.Range(1, 101 - saveManager.GetComponent<SaveManager>().critChance) == 1)
                 {
                     health = health - (saveManager.GetComponent<SaveManager>().damage + saveManager.GetComponent<SaveManager>().critDamage);
                 }

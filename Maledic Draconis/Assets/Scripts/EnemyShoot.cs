@@ -6,11 +6,11 @@ public class EnemyShoot : MonoBehaviour
 {
     public GameObject prefab;
     public GameObject player;
-    public float bulletSpeed = 10f;
+    public float bulletSpeed = 7f;
     public float playerDistanceMin = 5;
     private float playerDistance = 0;
-    public float bulletLifetime = 1.0f;
-    public float shootDelay = 1.0f;
+    public float bulletLifetime = .75f;
+    public float shootDelay = 1.5f;
     private float timer = 0;
     // Start is called before the first frame update
     void Start()
