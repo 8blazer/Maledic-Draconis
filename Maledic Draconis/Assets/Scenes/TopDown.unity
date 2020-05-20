@@ -679,6 +679,10 @@ MonoBehaviour:
     type: 3}
   treePrefab: {fileID: 3770772145217775125, guid: e8bed682c2ff9b54488d78ade5116b6a,
     type: 3}
+  koboldPrefab: {fileID: 5783089699992162718, guid: c8a8b4705114067408b8d2b002b07be0,
+    type: 3}
+  koboldArcherPrefab: {fileID: 745066467778747769, guid: 22e7c33f62ebc8f40a0237262798c828,
+    type: 3}
 --- !u!4 &961637153
 Transform:
   m_ObjectHideFlags: 0

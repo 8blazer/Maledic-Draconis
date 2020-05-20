@@ -12,8 +12,11 @@ EditorBuildSettings:
     path: Assets/Scenes/TopDown.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/Platformer1.unity
+    path: Assets/Scenes/Platformer.unity
     guid: a8a1ebe24d140f947ae937635c69400f
+  - enabled: 1
+    path: Assets/Scenes/TopDown2.unity
+    guid: 64bd455d9c52c614fbf475c2c31071ed
   - enabled: 1
     path: Assets/Scenes/Lose.unity
     guid: 805153820164d38419dedd03e695630f

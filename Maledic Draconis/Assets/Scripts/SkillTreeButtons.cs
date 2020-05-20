@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 public class SkillTreeButtons : MonoBehaviour
 {
     GameObject saveManager;
@@ -8,6 +9,142 @@ public class SkillTreeButtons : MonoBehaviour
     void Start()
     {
         saveManager = GameObject.Find("GameMaster");
+    }
+
+    void Update()
+    {
+        if (gameObject.name == "HealthMinusSpeed")
+        {
+            if (saveManager.GetComponent<SaveManager>().maxHPUpgrade == 0)
+            {
+                gameObject.GetComponent<Button>().interactable = false;
+            }
+            else
+            {
+                gameObject.GetComponent<Button>().interactable = true;
+            }
+        }
+        else if (gameObject.name == "Defense")
+        {
+            if (saveManager.GetComponent<SaveManager>().maxHPUpgrade == 0)
+            {
+                gameObject.GetComponent<Button>().interactable = false;
+            }
+            else
+            {
+                gameObject.GetComponent<Button>().interactable = true;
+            }
+        }
+        else if (gameObject.name == "RegenMinusHealth")
+        {
+            if (saveManager.GetComponent<SaveManager>().healthRegenUpgrade == 0)
+            {
+                gameObject.GetComponent<Button>().interactable = false;
+            }
+            else
+            {
+                gameObject.GetComponent<Button>().interactable = true;
+            }
+        }
+        else if (gameObject.name == "RegenMinusSpeed")
+        {
+            if (saveManager.GetComponent<SaveManager>().healthRegenUpgrade == 0)
+            {
+                gameObject.GetComponent<Button>().interactable = false;
+            }
+            else
+            {
+                gameObject.GetComponent<Button>().interactable = true;
+            }
+        }
+        else if (gameObject.name == "CritChance")
+        {
+            if (saveManager.GetComponent<SaveManager>().damage == 5)
+            {
+                gameObject.GetComponent<Button>().interactable = false;
+            }
+            else
+            {
+                gameObject.GetComponent<Button>().interactable = true;
+            }
+        }
+        else if (gameObject.name == "CritDamage")
+        {
+            if (saveManager.GetComponent<SaveManager>().damage == 5)
+            {
+                gameObject.GetComponent<Button>().interactable = false;
+            }
+            else
+            {
+                gameObject.GetComponent<Button>().interactable = true;
+            }
+        }
+        else if (gameObject.name == "SwingSpeedByHealth")
+        {
+            if (saveManager.GetComponent<SaveManager>().swingSpeed == 3)
+            {
+                gameObject.GetComponent<Button>().interactable = false;
+            }
+            else
+            {
+                gameObject.GetComponent<Button>().interactable = true;
+            }
+        }
+        else if (gameObject.name == "SwingSpeedByMissingHealth")
+        {
+            if (saveManager.GetComponent<SaveManager>().swingSpeed == 3)
+            {
+                gameObject.GetComponent<Button>().interactable = false;
+            }
+            else
+            {
+                gameObject.GetComponent<Button>().interactable = true;
+            }
+        }
+        else if (gameObject.name == "StartleDamage")
+        {
+            if (saveManager.GetComponent<SaveManager>().enemyTriggerDistance == 5)
+            {
+                gameObject.GetComponent<Button>().interactable = false;
+            }
+            else
+            {
+                gameObject.GetComponent<Button>().interactable = true;
+            }
+        }
+        else if (gameObject.name == "StartleCrit")
+        {
+            if (saveManager.GetComponent<SaveManager>().enemyTriggerDistance == 5)
+            {
+                gameObject.GetComponent<Button>().interactable = false;
+            }
+            else
+            {
+                gameObject.GetComponent<Button>().interactable = true;
+            }
+        }
+        else if (gameObject.name == "MoveSpeedByHealth")
+        {
+            if (saveManager.GetComponent<SaveManager>().speedUpgrade == 0)
+            {
+                gameObject.GetComponent<Button>().interactable = false;
+            }
+            else
+            {
+                gameObject.GetComponent<Button>().interactable = true;
+            }
+        }
+        else if (gameObject.name == "MoveSpeedByMissingHealth")
+        {
+            if (saveManager.GetComponent<SaveManager>().speedUpgrade == 0)
+            {
+                gameObject.GetComponent<Button>().interactable = false;
+            }
+            else
+            {
+                gameObject.GetComponent<Button>().interactable = true;
+            }
+        }
     }
 
     public void MaxHealth()
@@ -161,7 +298,7 @@ public class SkillTreeButtons : MonoBehaviour
     {
         if (saveManager.GetComponent<SaveManager>().exp >= saveManager.GetComponent<SaveManager>().expNeeded && saveManager.GetComponent<SaveManager>().startleCritDamage < 5 && saveManager.GetComponent<SaveManager>().enemyTriggerDistance < 5)
         {
-            saveManager.GetComponent<SaveManager>().startleCritDamage = saveManager.GetComponent<SaveManager>().startleDamage + 1;
+            saveManager.GetComponent<SaveManager>().startleCritDamage = saveManager.GetComponent<SaveManager>().startleCritDamage + 1;
             saveManager.GetComponent<SaveManager>().startleCritChance = saveManager.GetComponent<SaveManager>().startleCritChance + 10;
             saveManager.GetComponent<SaveManager>().exp = saveManager.GetComponent<SaveManager>().exp - saveManager.GetComponent<SaveManager>().expNeeded;
             saveManager.GetComponent<SaveManager>().expNeeded = Mathf.RoundToInt(saveManager.GetComponent<SaveManager>().expNeeded * 1.1f);
@@ -172,6 +309,7 @@ public class SkillTreeButtons : MonoBehaviour
         if (saveManager.GetComponent<SaveManager>().exp >= saveManager.GetComponent<SaveManager>().expNeeded && saveManager.GetComponent<SaveManager>().speedUpgrade < 5)
         {
             saveManager.GetComponent<SaveManager>().speed = saveManager.GetComponent<SaveManager>().speed + .5f;
+            saveManager.GetComponent<SaveManager>().speedUpgrade++;
             saveManager.GetComponent<SaveManager>().exp = saveManager.GetComponent<SaveManager>().exp - saveManager.GetComponent<SaveManager>().expNeeded;
             saveManager.GetComponent<SaveManager>().expNeeded = Mathf.RoundToInt(saveManager.GetComponent<SaveManager>().expNeeded * 1.1f);
         }

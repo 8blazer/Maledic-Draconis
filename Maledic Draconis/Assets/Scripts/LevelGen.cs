@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class LevelGen : MonoBehaviour
 {
 
@@ -27,6 +27,8 @@ public class LevelGen : MonoBehaviour
     public GameObject slimePrefab;
     public GameObject wolfPrefab;
     public GameObject treePrefab;
+    public GameObject koboldPrefab;
+    public GameObject koboldArcherPrefab;
     static public int enemyCount;
     // Start is called before the first frame update
     void Start()
@@ -386,7 +388,7 @@ public class LevelGen : MonoBehaviour
         }
 
         //Enemy Generator
-        enemyCount = open.Count / 60;
+        enemyCount = open.Count / 70;
         enemyCount = enemyCount + rnd.Next(-2, 3);
         if (enemyCount < 5)
         {
@@ -398,48 +400,96 @@ public class LevelGen : MonoBehaviour
         i = 0;
         while (i < enemyCount)
         {
-            enemyChoice = rnd.Next(1, 5);
-            iConverter = rnd.Next(1, open.Count);
-            string[] enemyCords = open[iConverter].Split(' ');
-            enemyX = float.Parse(enemyCords[0]);
-            enemyY = float.Parse(enemyCords[1]);
-            if (enemyChoice < 3)
+            if (SceneManager.GetActiveScene().name == "TopDown")
             {
-                GameObject slime = Instantiate(slimePrefab, new Vector3(enemyX, enemyY, 0), Quaternion.identity);
-                while (Vector3.Distance(prefab.transform.position, slime.transform.position) < 10)
+                enemyChoice = rnd.Next(1, 5);
+                iConverter = rnd.Next(1, open.Count);
+                string[] enemyCords = open[iConverter].Split(' ');
+                enemyX = float.Parse(enemyCords[0]);
+                enemyY = float.Parse(enemyCords[1]);
+                if (enemyChoice < 3)
                 {
-                    iConverter = rnd.Next(1, open.Count);
-                    enemyCords = open[iConverter].Split(' ');
-                    enemyX = float.Parse(enemyCords[0]);
-                    enemyY = float.Parse(enemyCords[1]);
-                    slime.transform.position = new Vector3(enemyX, enemyY, 0);
+                    GameObject slime = Instantiate(slimePrefab, new Vector3(enemyX, enemyY, 0), Quaternion.identity);
+                    while (Vector3.Distance(prefab.transform.position, slime.transform.position) < 10)
+                    {
+                        iConverter = rnd.Next(1, open.Count);
+                        enemyCords = open[iConverter].Split(' ');
+                        enemyX = float.Parse(enemyCords[0]);
+                        enemyY = float.Parse(enemyCords[1]);
+                        slime.transform.position = new Vector3(enemyX, enemyY, 0);
+                    }
                 }
-            }
-            else if (enemyChoice == 4)
-            {
-                GameObject wolf = Instantiate(wolfPrefab, new Vector3(enemyX, enemyY, 0), Quaternion.identity);
-                while (Vector3.Distance(prefab.transform.position, wolf.transform.position) < 10)
+                else if (enemyChoice == 4)
                 {
-                    iConverter = rnd.Next(1, open.Count);
-                    enemyCords = open[iConverter].Split(' ');
-                    enemyX = float.Parse(enemyCords[0]);
-                    enemyY = float.Parse(enemyCords[1]);
-                    wolf.transform.position = new Vector3(enemyX, enemyY, 0);
+                    GameObject wolf = Instantiate(wolfPrefab, new Vector3(enemyX, enemyY, 0), Quaternion.identity);
+                    while (Vector3.Distance(prefab.transform.position, wolf.transform.position) < 10)
+                    {
+                        iConverter = rnd.Next(1, open.Count);
+                        enemyCords = open[iConverter].Split(' ');
+                        enemyX = float.Parse(enemyCords[0]);
+                        enemyY = float.Parse(enemyCords[1]);
+                        wolf.transform.position = new Vector3(enemyX, enemyY, 0);
+                    }
                 }
+                else
+                {
+                    GameObject tree = Instantiate(treePrefab, new Vector3(enemyX, enemyY, 0), Quaternion.identity);
+                    while (Vector3.Distance(prefab.transform.position, tree.transform.position) < 10)
+                    {
+                        iConverter = rnd.Next(1, open.Count);
+                        enemyCords = open[iConverter].Split(' ');
+                        enemyX = float.Parse(enemyCords[0]);
+                        enemyY = float.Parse(enemyCords[1]);
+                        tree.transform.position = new Vector3(enemyX, enemyY, 0);
+                    }
+                }
+                i++;
             }
             else
             {
-                GameObject tree = Instantiate(treePrefab, new Vector3(enemyX, enemyY, 0), Quaternion.identity);
-                while (Vector3.Distance(prefab.transform.position, tree.transform.position) < 10)
+                enemyChoice = rnd.Next(1, 5);
+                iConverter = rnd.Next(1, open.Count);
+                string[] enemyCords = open[iConverter].Split(' ');
+                enemyX = float.Parse(enemyCords[0]);
+                enemyY = float.Parse(enemyCords[1]);
+                if (enemyChoice < 3)
                 {
-                    iConverter = rnd.Next(1, open.Count);
-                    enemyCords = open[iConverter].Split(' ');
-                    enemyX = float.Parse(enemyCords[0]);
-                    enemyY = float.Parse(enemyCords[1]);
-                    tree.transform.position = new Vector3(enemyX, enemyY, 0);
+                    GameObject wolf = Instantiate(wolfPrefab, new Vector3(enemyX, enemyY, 0), Quaternion.identity);
+                    while (Vector3.Distance(prefab.transform.position, wolf.transform.position) < 10)
+                    {
+                        iConverter = rnd.Next(1, open.Count);
+                        enemyCords = open[iConverter].Split(' ');
+                        enemyX = float.Parse(enemyCords[0]);
+                        enemyY = float.Parse(enemyCords[1]);
+                        wolf.transform.position = new Vector3(enemyX, enemyY, 0);
+                    }
                 }
+                else if (enemyChoice == 4)
+                {
+                    GameObject kobold = Instantiate(koboldPrefab, new Vector3(enemyX, enemyY, 0), Quaternion.identity);
+                    while (Vector3.Distance(prefab.transform.position, kobold.transform.position) < 10)
+                    {
+                        iConverter = rnd.Next(1, open.Count);
+                        enemyCords = open[iConverter].Split(' ');
+                        enemyX = float.Parse(enemyCords[0]);
+                        enemyY = float.Parse(enemyCords[1]);
+                        kobold.transform.position = new Vector3(enemyX, enemyY, 0);
+                    }
+                }
+                else
+                {
+                    GameObject koboldArcher = Instantiate(koboldArcherPrefab, new Vector3(enemyX, enemyY, 0), Quaternion.identity);
+                    while (Vector3.Distance(prefab.transform.position, koboldArcher.transform.position) < 10)
+                    {
+                        iConverter = rnd.Next(1, open.Count);
+                        enemyCords = open[iConverter].Split(' ');
+                        enemyX = float.Parse(enemyCords[0]);
+                        enemyY = float.Parse(enemyCords[1]);
+                        koboldArcher.transform.position = new Vector3(enemyX, enemyY, 0);
+                    }
+                }
+                i++;
             }
-            i++;
         }
     }
 }

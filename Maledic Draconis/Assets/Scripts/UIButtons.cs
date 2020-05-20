@@ -31,7 +31,7 @@ public class UIButtons : MonoBehaviour
     {
         if (this.gameObject.name == "MainMenu" && SceneManager.GetActiveScene().name == "SkillTree")
         {
-            exp.text = saveManager.GetComponent<SaveManager>().exp + "/" + saveManager.GetComponent<SaveManager>().expNeeded;
+            exp.text = "EXP: " + saveManager.GetComponent<SaveManager>().exp + "/" + saveManager.GetComponent<SaveManager>().expNeeded;
         }
     }
 
