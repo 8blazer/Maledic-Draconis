@@ -13,9 +13,8 @@ public class PlayerMovement : MonoBehaviour
     float regenTimer;
     float regenTimeNeeded;
     // Start is called before the first frame update
-    IEnumerator Start()
+    void Start()
     {
-        yield return new WaitForSeconds(.01f);
         saveManager = GameObject.Find("GameMaster");
         health = saveManager.GetComponent<SaveManager>().maxHealth;
         timer = saveManager.GetComponent<SaveManager>().swingSpeed;
@@ -61,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 square.transform.gameObject.SetActive(false);
             }
-            else
+            else if (!LevelGen.open.Contains(square.transform.position.x + " " + square.transform.position.y))
             {
                 square.transform.gameObject.SetActive(true);
             }

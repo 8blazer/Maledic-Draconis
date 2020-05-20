@@ -7,7 +7,7 @@ public class PlayerShoot : MonoBehaviour
     public GameObject prefab;
     public GameObject saveManager;
     float swingSpeed;
-    public float bulletLifetime = 0.1f;
+    public float bulletLifetime = 0.15f;
     public float bulletSpeed = 10.0f;
     float timer = 0;
     // Start is called before the first frame update

@@ -18,8 +18,8 @@ public class LevelGen : MonoBehaviour
     static public float permaStartY;
     float midX;
     float midY;
-    float goalX;
-    float goalY;
+    static public float goalX;
+    static public float goalY;
     float tempX;
     float tempY;
     float x = -49.5f;

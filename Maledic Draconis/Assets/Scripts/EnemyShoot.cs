@@ -7,7 +7,7 @@ public class EnemyShoot : MonoBehaviour
     public GameObject prefab;
     public GameObject player;
     public float bulletSpeed = 7f;
-    public float playerDistanceMin = 5;
+    public float playerDistanceMin = 3;
     private float playerDistance = 0;
     public float bulletLifetime = .75f;
     public float shootDelay = 1.5f;

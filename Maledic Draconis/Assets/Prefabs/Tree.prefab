@@ -162,6 +162,6 @@ MonoBehaviour:
   prefab: {fileID: 1063694573220636156, guid: 8d919503619704547819551d6e74ee6c, type: 3}
   player: {fileID: 0}
   bulletSpeed: 10
-  playerDistanceMin: 10
+  playerDistanceMin: 5
   bulletLifetime: 0.5
   shootDelay: 1

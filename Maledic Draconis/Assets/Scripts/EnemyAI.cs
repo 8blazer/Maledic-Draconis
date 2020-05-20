@@ -16,6 +16,8 @@ public class EnemyAI : MonoBehaviour
     float startledTimer;
     float attackTimer;
     public int health;
+    int xForce;
+    int yForce;
     System.Random rnd = new System.Random();
     // Start is called before the first frame update
     void Start()
@@ -42,27 +44,27 @@ public class EnemyAI : MonoBehaviour
         }
         attackTimer += Time.deltaTime;
         Vector2 chaseDirection = new Vector2(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y);
-        if (chaseDirection.magnitude <= saveManager.GetComponent<SaveManager>().enemyTriggerDistance)
+        if (chaseDirection.magnitude <= saveManager.GetComponent<SaveManager>().enemyTriggerDistance)  //If the enemy is closer than the trigger distance
         {
             ChasePlayer();
             triggered = true;
             timer = 0;
             startledTimerGoing = true;
         }
-        else if (triggered == false && timer > 3 && chaseDirection.magnitude < 10)
+        else //If the enemy is further than the trigger distance
         {
-            triggered = true;
-            startled = true;
-            Pace();
-            timer = 0;
-        }
-        if (chaseDirection.magnitude > saveManager.GetComponent<SaveManager>().enemyTriggerDistance)
-        {
-            if (triggered == true && Random.Range(1,101) == 1)
+            if ((triggered == true && chaseDirection.magnitude < saveManager.GetComponent<SaveManager>().enemyTriggerDistance + .5f) || chaseDirection.magnitude > 10 || triggered == false && Random.Range(1, 101) == 1) //If the enemy is triggered or you got far enough away
             {
                 triggered = false;
                 timerGoing = true;
                 GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+            }
+            else if (triggered == false && timer > 3) //If the enemy isn't triggered and the time that they've been sitting is greater than three
+            {
+                startled = true;
+                Pace();
+                timer = 0;
+                timerGoing = false;
             }
         }
         if (health < 1)
@@ -90,6 +92,12 @@ public class EnemyAI : MonoBehaviour
             }
             Destroy(this.gameObject);
         }
+        /*
+        if (chaseDirection.magnitude < 15 && (GetComponent<Rigidbody2D>().velocity.x != 0 || GetComponent<Rigidbody2D>().velocity.y != 0))
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+        }
+        */
     }
     void ChasePlayer()
     {
@@ -99,8 +107,8 @@ public class EnemyAI : MonoBehaviour
     }
     void Pace()
     {
-        int xForce = Random.Range(25, 40);
-        int yForce = Random.Range(25, 40);
+        xForce = Random.Range(25, 40);
+        yForce = Random.Range(25, 40);
         if (Random.Range(1,3) == 1)
         {
             xForce = xForce * -1;
