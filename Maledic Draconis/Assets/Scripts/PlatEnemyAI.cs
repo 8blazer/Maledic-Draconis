@@ -2,67 +2,43 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAI : MonoBehaviour
+public class PlatEnemyAI : MonoBehaviour
 {
     public GameObject player;
     GameObject saveManager;
     public float chaseSpeed = 1.0f;
-    bool triggered = false;
     bool startled = true;
-    float timer = 3.1f;
-    bool timerGoing = false;
-    bool startledTimerGoing = false;
-    float startledTimer;
     float attackTimer;
     public int health;
     int xForce;
     int yForce;
     System.Random rnd = new System.Random();
+    public int moveSpeed;
+    public bool wanderRight;
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
         saveManager = GameObject.Find("GameMaster");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (timerGoing)
-        {
-            timer += Time.deltaTime;
-        }
-        if (startledTimerGoing)
-        {
-            startledTimer += Time.deltaTime;
-            if (startledTimer > 1)
-            {
-                startled = false;
-            }
-        }
         attackTimer += Time.deltaTime;
         Vector2 chaseDirection = new Vector2(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y);
         if (chaseDirection.magnitude <= saveManager.GetComponent<SaveManager>().enemyTriggerDistance)  //If the enemy is closer than the trigger distance
         {
             ChasePlayer();
-            triggered = true;
-            timer = 0;
-            startledTimerGoing = true;
         }
         else //If the enemy is further than the trigger distance
         {
-            if ((triggered == true && chaseDirection.magnitude < saveManager.GetComponent<SaveManager>().enemyTriggerDistance + .5f) || chaseDirection.magnitude > 10 || triggered == false && Random.Range(1, 101) == 1) //If the enemy is triggered or you got far enough away
+            if (wanderRight)
             {
-                triggered = false;
-                timerGoing = true;
-                GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
             }
-            else if (triggered == false && timer > 3) //If the enemy isn't triggered and the time that they've been sitting is greater than three
+            else
             {
-                startled = true;
-                Pace();
-                timer = 0;
-                timerGoing = false;
+                GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
             }
         }
         if (health < 1)
@@ -90,32 +66,12 @@ public class EnemyAI : MonoBehaviour
             }
             Destroy(this.gameObject);
         }
-        /*
-        if (chaseDirection.magnitude < 15 && (GetComponent<Rigidbody2D>().velocity.x != 0 || GetComponent<Rigidbody2D>().velocity.y != 0))
-        {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-        }
-        */
     }
     void ChasePlayer()
     {
-        Vector2 chaseDirection = new Vector2(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y);
+        Vector2 chaseDirection = new Vector2(player.transform.position.x - transform.position.x, GetComponent<Rigidbody2D>().velocity.y);
         chaseDirection.Normalize();
-        GetComponent<Rigidbody2D>().velocity = chaseDirection * chaseSpeed;
-    }
-    void Pace()
-    {
-        xForce = Random.Range(25, 40);
-        yForce = Random.Range(25, 40);
-        if (Random.Range(1,3) == 1)
-        {
-            xForce = xForce * -1;
-        }
-        if (Random.Range(1, 3) == 1)
-        {
-            yForce = yForce * -1;
-        }
-        GetComponent<Rigidbody2D>().AddForce(new Vector2(xForce, yForce));
+        GetComponent<Rigidbody2D>().velocity = new Vector2(chaseDirection.x * chaseSpeed, GetComponent<Rigidbody2D>().velocity.y);
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -163,6 +119,20 @@ public class EnemyAI : MonoBehaviour
             {
                 PlayerMovement.health = PlayerMovement.health - 10 + saveManager.GetComponent<SaveManager>().defense;
                 attackTimer = 0;
+            }
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Wall")
+        {
+            if (wanderRight)
+            {
+                wanderRight = false;
+            }
+            else
+            {
+                wanderRight = true;
             }
         }
     }
