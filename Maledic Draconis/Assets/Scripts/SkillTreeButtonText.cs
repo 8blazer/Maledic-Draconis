@@ -45,7 +45,7 @@ public class SkillTreeButtonText : MonoBehaviour
                 text.text = (saveManager.GetComponent<SaveManager>().critDamage - 2).ToString() + "/5";
                 break;
             case "SwingSpeed":
-                text.text = Mathf.RoundToInt(((3f - saveManager.GetComponent<SaveManager>().swingSpeed) / .33f)) + "/5";
+                text.text = Mathf.RoundToInt(((2f - saveManager.GetComponent<SaveManager>().swingSpeed) / .33f)) + "/5";
                 break;
             case "EnemyTriggerDistance":
                 text.text = ((5 - saveManager.GetComponent<SaveManager>().enemyTriggerDistance) / .5).ToString() + "/5";

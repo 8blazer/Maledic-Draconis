@@ -54,7 +54,7 @@ public class SaveManager : MonoBehaviour
                     Defense = 0,
                     CritChance = 10,
                     CritDamage = 2,
-                    SwingSpeed = 3,
+                    SwingSpeed = 2,
                     EnemyTriggerDistance = 5,
                     StartleDamage = 0,
                     StartleCritDamage = 0,

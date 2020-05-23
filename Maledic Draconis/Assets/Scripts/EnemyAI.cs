@@ -70,7 +70,7 @@ public class EnemyAI : MonoBehaviour
             LevelGen.enemyCount = LevelGen.enemyCount - 1;
             if (this.gameObject.name == "Slime(Clone)")
             {
-                saveManager.GetComponent<SaveManager>().exp = saveManager.GetComponent<SaveManager>().exp + 1;
+                saveManager.GetComponent<SaveManager>().exp = saveManager.GetComponent<SaveManager>().exp + 10000;
             }
             else if (this.gameObject.name == "Wolf(Clone)")
             {
@@ -149,12 +149,12 @@ public class EnemyAI : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            if (this.gameObject.name == "Slime(Clone)" && attackTimer > 3)
+            if (this.gameObject.name == "Slime(Clone)" && attackTimer > 2)
             {
                 PlayerMovement.health = PlayerMovement.health - 7 + saveManager.GetComponent<SaveManager>().defense;
                 attackTimer = 0;
             }
-            else if (this.gameObject.name == "Wolf(Clone)" && attackTimer > 2)
+            else if (this.gameObject.name == "Wolf(Clone)" && attackTimer > 1.5f)
             {
                 PlayerMovement.health = PlayerMovement.health - 10 + saveManager.GetComponent<SaveManager>().defense;
                 attackTimer = 0;

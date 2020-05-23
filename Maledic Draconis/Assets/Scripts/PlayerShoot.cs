@@ -22,7 +22,7 @@ public class PlayerShoot : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        if (Input.GetButton("Fire1") && timer > .5f)//saveManager.GetComponent<SaveManager>().swingSpeed)  <-- THIS INSTEAD OF .5f
+        if (Input.GetButton("Fire1") && timer > saveManager.GetComponent<SaveManager>().swingSpeed)
         {
             GameObject bullet = Instantiate(prefab, transform.position, Quaternion.identity);
             Vector3 mousePosition = Input.mousePosition;

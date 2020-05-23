@@ -77,9 +77,13 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.tag == "EBullet")
         {
-            if (SceneManager.GetActiveScene().name == "TopDown")
+            if (SceneManager.GetActiveScene().name == "TopDown" || SceneManager.GetActiveScene().name == "Platformer")
             {
                 health = health - (10 - saveManager.GetComponent<SaveManager>().defense);
+            }
+            else if (SceneManager.GetActiveScene().name == "TopDown2" || SceneManager.GetActiveScene().name == "Platformer2")
+            {
+                health = health - (20 - saveManager.GetComponent<SaveManager>().defense);
             }
         }
     }
