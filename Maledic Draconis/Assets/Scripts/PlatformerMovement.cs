@@ -49,7 +49,6 @@ public class PlatformerMovement : MonoBehaviour
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(moveX * saveManager.GetComponent<SaveManager>().speed, GetComponent<Rigidbody2D>().velocity.y);
         }
-        Debug.Log(GetComponent<Rigidbody2D>().velocity.x);
         if (timer < 30 && saveManager.GetComponent<SaveManager>().healthRegen > 0)
         {
             timer += Time.deltaTime;
@@ -65,7 +64,7 @@ public class PlatformerMovement : MonoBehaviour
             NotGrounded();
             gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 100 * jumpSpeed));
         }
-        if (transform.position.y < -10)
+        if (transform.position.y < -10 && SceneManager.GetActiveScene().name == "Platformer")
         {
             health = 0;
         }
@@ -77,11 +76,17 @@ public class PlatformerMovement : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
-        Grounded();
+        if (collision.name != "Wolf" || (collision.name == "Wolf" && collision.gameObject.GetComponent<EnemyFeet>().grounded))
+        {
+            Grounded();
+        }
     }
     void OnTriggerStay2D(Collider2D collision)
     {
-        Grounded();
+        if (collision.name != "Wolf" || (collision.name == "Wolf" && collision.gameObject.GetComponent<EnemyFeet>().grounded))
+        {
+            Grounded();
+        }
     }
     void OnTriggerExit2D(Collider2D collision)
     {
