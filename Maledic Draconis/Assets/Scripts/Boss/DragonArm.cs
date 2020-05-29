@@ -85,6 +85,17 @@ public class DragonArm : MonoBehaviour
             PlayerMovement.health = PlayerMovement.health - 45 + saveManager.GetComponent<SaveManager>().defense;
             attackTimer = 0;
         }
+    }
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.name == "Cynthia" && swinging == 2 && attackTimer > .5f)
+        {
+            PlayerMovement.health = PlayerMovement.health - 45 + saveManager.GetComponent<SaveManager>().defense;
+            attackTimer = 0;
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
         if (collision.gameObject.tag == "Bullet")
         {
             if (saveManager.GetComponent<SaveManager>().critChance > 99 || Random.Range(1, 101 - saveManager.GetComponent<SaveManager>().critChance) == 1)
@@ -95,14 +106,6 @@ public class DragonArm : MonoBehaviour
             {
                 DragonHead.health = DragonHead.health - saveManager.GetComponent<SaveManager>().damage - Random.Range(-1, 2);
             }
-        }
-    }
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.gameObject.name == "Cynthia" && swinging == 2 && attackTimer > .5f)
-        {
-            PlayerMovement.health = PlayerMovement.health - 45 + saveManager.GetComponent<SaveManager>().defense;
-            attackTimer = 0;
         }
     }
 }

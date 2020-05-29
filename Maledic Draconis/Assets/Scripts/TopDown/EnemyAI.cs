@@ -70,7 +70,7 @@ public class EnemyAI : MonoBehaviour
             LevelGen.enemyCount = LevelGen.enemyCount - 1;
             if (this.gameObject.name == "Slime(Clone)")
             {
-                saveManager.GetComponent<SaveManager>().exp = saveManager.GetComponent<SaveManager>().exp + 10000;
+                saveManager.GetComponent<SaveManager>().exp = saveManager.GetComponent<SaveManager>().exp + 1;
             }
             else if (this.gameObject.name == "Wolf(Clone)")
             {
@@ -117,7 +117,7 @@ public class EnemyAI : MonoBehaviour
         }
         GetComponent<Rigidbody2D>().AddForce(new Vector2(xForce, yForce));
     }
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Bullet")
         {

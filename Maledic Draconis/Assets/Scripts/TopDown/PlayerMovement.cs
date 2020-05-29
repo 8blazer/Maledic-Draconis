@@ -60,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 square.transform.gameObject.SetActive(false);
             }
-            else if (!LevelGen.open.Contains(square.transform.position.x + " " + square.transform.position.y))
+            else if (!LevelGen.open.Contains(square.transform.position.x + " " + square.transform.position.y) && square.transform.gameObject.activeSelf == false)
             {
                 square.transform.gameObject.SetActive(true);
             }

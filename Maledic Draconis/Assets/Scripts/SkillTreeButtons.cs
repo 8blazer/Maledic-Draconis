@@ -200,7 +200,7 @@ public class SkillTreeButtons : MonoBehaviour
     {
         if (saveManager.GetComponent<SaveManager>().exp >= saveManager.GetComponent<SaveManager>().expNeeded && saveManager.GetComponent<SaveManager>().healthRegenMinusHPUpgrade < 5 && saveManager.GetComponent<SaveManager>().healthRegen > 0)
         {
-            saveManager.GetComponent<SaveManager>().healthRegen = saveManager.GetComponent<SaveManager>().healthRegen + 30;
+            saveManager.GetComponent<SaveManager>().healthRegen = saveManager.GetComponent<SaveManager>().healthRegen + 20;
             saveManager.GetComponent<SaveManager>().maxHealth = saveManager.GetComponent<SaveManager>().maxHealth - 10;
             saveManager.GetComponent<SaveManager>().exp = saveManager.GetComponent<SaveManager>().exp - saveManager.GetComponent<SaveManager>().expNeeded;
             saveManager.GetComponent<SaveManager>().expNeeded = Mathf.RoundToInt(saveManager.GetComponent<SaveManager>().expNeeded * 1.1f);
@@ -211,7 +211,7 @@ public class SkillTreeButtons : MonoBehaviour
     {
         if (saveManager.GetComponent<SaveManager>().exp >= saveManager.GetComponent<SaveManager>().expNeeded && saveManager.GetComponent<SaveManager>().healthRegenMinusSpeedUpgrade < 5 && saveManager.GetComponent<SaveManager>().healthRegen > 0)
         {
-            saveManager.GetComponent<SaveManager>().healthRegen = saveManager.GetComponent<SaveManager>().healthRegen + 30;
+            saveManager.GetComponent<SaveManager>().healthRegen = saveManager.GetComponent<SaveManager>().healthRegen + 20;
             saveManager.GetComponent<SaveManager>().speed = saveManager.GetComponent<SaveManager>().speed - .5f;
             if (saveManager.GetComponent<SaveManager>().speed < .5f)
             {

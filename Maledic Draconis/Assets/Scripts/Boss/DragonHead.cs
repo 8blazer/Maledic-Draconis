@@ -7,7 +7,7 @@ public class DragonHead : MonoBehaviour
 {
     public GameObject player;
     public GameObject saveManager;
-    static public int health = 100;
+    static public int health = 200;
     public ParticleSystem particleSystem;
     public GameObject bossWall;
     float timer;
@@ -50,17 +50,17 @@ public class DragonHead : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Bullet")
         {
             if (saveManager.GetComponent<SaveManager>().critChance > 99 || Random.Range(1, 101 - saveManager.GetComponent<SaveManager>().critChance) == 1)
             {
-                health = health - (saveManager.GetComponent<SaveManager>().damage + saveManager.GetComponent<SaveManager>().critDamage);
+                DragonHead.health = DragonHead.health - (saveManager.GetComponent<SaveManager>().damage + saveManager.GetComponent<SaveManager>().critDamage);
             }
             else
             {
-                health = health - saveManager.GetComponent<SaveManager>().damage - Random.Range(-1, 2);
+                DragonHead.health = DragonHead.health - saveManager.GetComponent<SaveManager>().damage - Random.Range(-1, 2);
             }
         }
     }

@@ -61,4 +61,11 @@ public class UIButtons : MonoBehaviour
     {
         SceneManager.LoadScene("SkillTree");
     }
+
+    public void QuitGame()
+    {
+        saveManager = GameObject.Find("GameMaster");
+        saveManager.GetComponent<SaveManager>().ToJson();
+        Application.Quit();
+    }
 }

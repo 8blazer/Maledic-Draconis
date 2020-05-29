@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class BossWall : MonoBehaviour
 {
     public GameObject bossWall;
+    public Image slider1;
+    public Image slider2;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +20,8 @@ public class BossWall : MonoBehaviour
         {
             bossWall.GetComponent<BoxCollider2D>().enabled = true;
             bossWall.GetComponent<SpriteRenderer>().enabled = true;
+            slider1.GetComponent<Image>().enabled = true;
+            slider2.GetComponent<Image>().enabled = true;
             Destroy(this);
         }
     }

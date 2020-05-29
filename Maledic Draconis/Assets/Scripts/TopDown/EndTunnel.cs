@@ -38,6 +38,8 @@ public class EndTunnel : MonoBehaviour
         {
             LevelGen.open.Clear();
             LevelGen.squares.Clear();
+            GameObject saveManager = GameObject.Find("GameMaster");
+            saveManager.GetComponent<SaveManager>().ToJson();
             if (SceneManager.GetActiveScene().name == "TopDown")
             {
                 SceneManager.LoadScene("Platformer");
