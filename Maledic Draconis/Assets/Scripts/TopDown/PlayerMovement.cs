@@ -30,7 +30,31 @@ public class PlayerMovement : MonoBehaviour
     {
         healthSlider.value = health;
         float x = Input.GetAxis("Horizontal");
+        if (x > 0)
+        {
+            GetComponent<Animator>().SetFloat("x", 1);
+        }
+        else if (x < 0)
+        {
+            GetComponent<Animator>().SetFloat("x", -1);
+        }
+        else
+        {
+            GetComponent<Animator>().SetFloat("x", 0);
+        }
         float y = Input.GetAxis("Vertical");
+        if (y > 0)
+        {
+            GetComponent<Animator>().SetFloat("y", 1);
+        }
+        else if (y < 0)
+        {
+            GetComponent<Animator>().SetFloat("y", -1);
+        }
+        else
+        {
+            GetComponent<Animator>().SetFloat("y", 0);
+        }
         Vector2 velocity = new Vector2(x, y);
         if (timer < 30 && saveManager.GetComponent<SaveManager>().healthRegen > 0)
         {

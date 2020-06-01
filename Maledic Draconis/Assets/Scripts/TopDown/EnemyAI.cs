@@ -5,6 +5,10 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {
     public GameObject player;
+    public Sprite koboldRight;
+    public Sprite koboldLeft;
+    public Sprite koboldUp;
+    public Sprite koboldDown;
     GameObject saveManager;
     public float chaseSpeed = 1.0f;
     bool triggered = false;
@@ -28,6 +32,54 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GetComponent<Animator>() != null)
+        {
+            if (GetComponent<Rigidbody2D>().velocity.x > .3)
+            {
+                GetComponent<Animator>().SetFloat("x", 1);
+            }
+            else if (GetComponent<Rigidbody2D>().velocity.x < -.3)
+            {
+                GetComponent<Animator>().SetFloat("x", -1);
+            }
+            else
+            {
+                GetComponent<Animator>().SetFloat("x", 0);
+            }
+            float y = Input.GetAxis("Vertical");
+            if (GetComponent<Rigidbody2D>().velocity.y > .3)
+            {
+                GetComponent<Animator>().SetFloat("y", 1);
+            }
+            else if (GetComponent<Rigidbody2D>().velocity.y < -.3)
+            {
+                GetComponent<Animator>().SetFloat("y", -1);
+            }
+            else
+            {
+                GetComponent<Animator>().SetFloat("y", 0);
+            }
+        }
+        else if (gameObject.name == "Kobold(Clone)" || gameObject.name == "KoboldArcher(Clone)")
+        {
+            if (GetComponent<Rigidbody2D>().velocity.x > .3)
+            {
+                GetComponent<SpriteRenderer>().sprite = koboldRight;
+            }
+            else if (GetComponent<Rigidbody2D>().velocity.x < -.3)
+            {
+                GetComponent<SpriteRenderer>().sprite = koboldLeft;
+            }
+            float y = Input.GetAxis("Vertical");
+            if (GetComponent<Rigidbody2D>().velocity.y > .3)
+            {
+                GetComponent<SpriteRenderer>().sprite = koboldUp;
+            }
+            else if (GetComponent<Rigidbody2D>().velocity.y < -.3)
+            {
+                GetComponent<SpriteRenderer>().sprite = koboldDown;
+            }
+        }
         if (timerGoing)
         {
             timer += Time.deltaTime;

@@ -209,6 +209,7 @@ GameObject:
   - component: {fileID: 49579778}
   - component: {fileID: 49579782}
   - component: {fileID: 49579783}
+  - component: {fileID: 49579784}
   m_Layer: 11
   m_Name: Cynthia
   m_TagString: Player
@@ -250,9 +251,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.2}
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.15
 --- !u!212 &49579780
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -291,9 +292,10 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0.95662296, g: 1, b: 0, a: 1}
+  m_SortingOrder: 999
+  m_Sprite: {fileID: -1284659157817965314, guid: 4bb020342feb18042a625d9063a7be91,
+    type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -312,7 +314,7 @@ Transform:
   m_GameObject: {fileID: 49579777}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 519420032}
   m_Father: {fileID: 0}
@@ -348,6 +350,25 @@ MonoBehaviour:
   saveManager: {fileID: 0}
   bulletLifetime: 0.1
   bulletSpeed: 10
+--- !u!95 &49579784
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49579777}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5b885bb49da815e46b2577b38615f3f5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &448882701
 GameObject:
   m_ObjectHideFlags: 0
